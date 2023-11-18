@@ -1,0 +1,23 @@
+# Spring Boot specific
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+*.classpath
+*.project
+
+# Logs
+logs/
+*.log
+
+# OS or editor generated files
+.DS_Store
+Thumbs.db
+
+# Gradle specific
+.gradle/
+build/
