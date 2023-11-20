@@ -1,8 +1,10 @@
 package com.cloudproject.FlightTicketReservationSystem.domains;
 
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+
 import java.util.Set;
 
 @Entity

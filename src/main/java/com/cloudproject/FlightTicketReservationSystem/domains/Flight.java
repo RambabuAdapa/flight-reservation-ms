@@ -1,9 +1,9 @@
 package com.cloudproject.FlightTicketReservationSystem.domains;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import java.sql.Timestamp;
 import java.util.Date;

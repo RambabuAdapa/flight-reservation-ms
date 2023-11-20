@@ -4,9 +4,11 @@ import com.cloudproject.FlightTicketReservationSystem.domains.User;
 import com.cloudproject.FlightTicketReservationSystem.exceptions.UserAlreadyRegistered;
 import com.cloudproject.FlightTicketReservationSystem.exceptions.UserNotFound;
 import com.cloudproject.FlightTicketReservationSystem.repositories.UserRepository;
+import com.cloudproject.FlightTicketReservationSystem.services.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +24,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+    @Autowired
+    private SecurityService securityService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping("/showReg")
@@ -34,16 +43,13 @@ public class UserController {
     public String register(@ModelAttribute("user") User user) {
         //handle error here what is email already exists.
         LOGGER.info("{} Inside register()", user.getEmail());
-        Optional<User> foundUser = userRepository.findByEmail(user.getEmail());
+        Optional<User> foundUser= userRepository.findByEmail(user.getEmail());
         if(foundUser.isPresent()){
             LOGGER.error("User is already registered with email {} ",user.getEmail());
             throw new UserAlreadyRegistered("Email exists: "+user.getEmail());
-        }else{
-            LOGGER.error("User not registered with email {} ",user.getEmail());
         }
         LOGGER.info("Email Exists: "+user.getEmail());
-//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setPassword(user.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "login/login";
     }
@@ -64,8 +70,7 @@ public class UserController {
             throw new UserNotFound("Email not found: "+email);
         }
         LOGGER.info("Email Exists: "+email);
-//        boolean loginResponse = securityService.login(email, password);
-        boolean loginResponse = true;
+        boolean loginResponse = securityService.login(email, password);
         if(loginResponse) {
             modelmap.addAttribute("msg","Successfully logged in");
             return "flights/findFlights";

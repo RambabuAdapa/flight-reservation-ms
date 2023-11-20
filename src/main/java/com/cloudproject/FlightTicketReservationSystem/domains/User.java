@@ -1,6 +1,6 @@
 package com.cloudproject.FlightTicketReservationSystem.domains;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity

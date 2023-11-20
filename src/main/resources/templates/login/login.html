@@ -36,7 +36,8 @@
                     ng-model="user.password"
                            ng-required="true"
                            ng-minlength="3">
-                    <p class="error validationerror" ng-show="loginForm.password.$invalid && loginForm.password.$touched">Please fill out correct password. Pasword must be atleast 3 characters</p>
+                    <p class="error validationerror" ng
+                       \-show="loginForm.password.$invalid && loginForm.password.$touched">Please fill out correct password. Pasword must be atleast 3 characters</p>
                 </div>
 
                 <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Login</button>

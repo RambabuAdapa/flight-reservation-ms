@@ -1,6 +1,6 @@
 package com.cloudproject.FlightTicketReservationSystem.domains;
 
-import jakarta.persistence.Entity;
+import javax.persistence.Entity;
 
 @Entity
 public class Passenger extends AbstractEntity {
